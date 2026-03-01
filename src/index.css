@@ -1,3 +1,70 @@
 @import "tailwindcss";
 
 /* You can add custom styles here later, e.g. using @theme { ... } */
+
+
+:root {
+  --color-primary: 236 112 99;        /* base orange */
+  --color-primary-hover: 220 95 80;   /* darker */
+  --color-primary-light: 255 230 225; /* very light bg */
+  --color-primary-light-bg: rgba(236, 112, 99, 0.15);  /* light transparent orange bg */
+  --color-white-light: rgba(255, 255, 255, 0.2);
+  --color-success: 82 183 136;        /* green for success */
+  --color-success-light-bg: rgba(82, 183, 136, 0.15);  /* light transparent green bg */
+  --color-info: 74 144 226;           /* blue for info */
+  --gradient-hero: linear-gradient(135deg, rgb(236 112 99) 0%, rgb(180 120 110) 25%, rgb(120 140 160) 75%, rgb(100 150 180) 100%);
+}
+
+/* In your component styles or index.css */
+.button {
+  background-color: rgb(var(--color-primary));
+  color: white;
+}
+
+.button:hover {
+  background-color: rgb(var(--color-primary-hover));
+}
+
+.nav-item:hover {
+  background-color: rgb(var(--color-primary));
+  color: white;
+}
+
+.link {
+  color: rgb(var(--color-primary));
+}
+
+.link:hover {
+  color: rgb(var(--color-primary-hover));
+}
+
+.primary-button {
+  background-color: rgb(var(--color-primary));
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: rgb(var(--color-primary-hover));
+}
+
+/* Gradient background for hero/banner sections */
+.bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+
+/* Floating animation for hero title */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
