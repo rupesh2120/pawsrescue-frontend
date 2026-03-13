@@ -1,9 +1,12 @@
 import type { Pet } from "../containers/Home/FeaturedPetsSection";
 import { Heart, MapPin, Calendar } from "lucide-react";
 import { useState } from "react";
+import { PetModal } from "./PetModal";
+import { Section } from "./Section";
 
 export const Card = ({ pet }: { pet: Pet }) => {
   const [isLiked, setIsLiked] = useState(pet.liked);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     name,
     type,
@@ -16,7 +19,9 @@ export const Card = ({ pet }: { pet: Pet }) => {
     imageUrl,
   } = pet;
   return (
-    <div className="rounded-lg bg-white shadow-md relative">
+    <>
+      <PetModal pet={pet} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <div className="rounded-lg bg-white shadow-md relative cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setIsModalOpen(true)}>
       <img
         src={imageUrl}
         alt={name}
@@ -79,17 +84,20 @@ export const Card = ({ pet }: { pet: Pet }) => {
             </p>
           </div>
         </div>
-        <div>
-          {attributes.map((attr, index) => (
-            <span
-              key={index}
-              className="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1"
-            >
-              {attr}
-            </span>
-          ))}
-        </div>
+        <Section title="Attributes" className="">
+          <div>
+            {attributes.map((attr, index) => (
+              <span
+                key={index}
+                className="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1"
+              >
+                {attr}
+              </span>
+            ))}
+          </div>
+        </Section>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
