@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from "../../components/Button"
 import { Sparkles, Heart } from "lucide-react"
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-150 px-60 bg-gradient-hero justify-center items-center flex flex-col">
       <Button 
@@ -29,7 +32,7 @@ export const HeroSection = () => {
           fontSize="18px"
           fontWeight="600"
           icon={<Heart size={14} />}
-          onClick={() => {}}
+          onClick={() => navigate('/animals')}
           showHoverIcon={true}
         />
         <Button 

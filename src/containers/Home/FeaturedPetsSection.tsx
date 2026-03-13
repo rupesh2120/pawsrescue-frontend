@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from "../../components/Button"
 import { Cards } from "../Cards"
 
@@ -16,6 +17,7 @@ export interface Pet {
 }
 
 export const FeaturedPetsSection = () => {
+  const navigate = useNavigate();
 
    const petsData: Pet[] = [
     {
@@ -112,7 +114,7 @@ export const FeaturedPetsSection = () => {
           radius="16px"
           fontSize="16px"
           fontWeight="400"
-          onClick={() => {}}
+          onClick={() => navigate('/animals')}
           showHoverIcon={true}
         />
       </div>
