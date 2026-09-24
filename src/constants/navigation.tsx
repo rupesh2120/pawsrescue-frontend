@@ -1,4 +1,4 @@
-import { FileText, Heart, Home, Info, Stethoscope } from "lucide-react";
+import { FileText, Heart, Home, Info, LogIn, Stethoscope } from "lucide-react";
 import type { NavigationItem } from "../types/navigation";
 
 export const NAV_ITEMS: NavigationItem[] = [
@@ -11,6 +11,11 @@ export const NAV_ITEMS: NavigationItem[] = [
     name: "Animals",
     path: "/animals",
     icon: <Heart size={18} />,
+  },
+  {
+    name: "Log in",
+    path: "/login",
+    icon: <LogIn size={18} />,
   },
   {
     name: "Vet Care",

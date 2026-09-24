@@ -3,10 +3,15 @@ import { Heart, MapPin, Calendar } from "lucide-react";
 import { useState } from "react";
 import { PetModal } from "./PetModal";
 import { Section } from "./Section";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "../utils/appStore";
 
 export const Card = ({ pet }: { pet: Pet }) => {
   const [isLiked, setIsLiked] = useState(pet.liked);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user.user);
   const {
     name,
     type,
@@ -18,10 +23,19 @@ export const Card = ({ pet }: { pet: Pet }) => {
     attributes,
     imageUrl,
   } = pet;
+
+  const handleCardClick = () => {
+    if (!user) {
+      navigate("/login", { state: { from: `/animals/${pet.id}` } });
+      return;
+    }
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <PetModal pet={pet} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <div className="rounded-lg bg-white shadow-md relative cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setIsModalOpen(true)}>
+      <div className="rounded-lg bg-white shadow-md relative cursor-pointer hover:shadow-lg transition-shadow" onClick={handleCardClick}>
       <img
         src={imageUrl}
         alt={name}
@@ -55,7 +69,10 @@ export const Card = ({ pet }: { pet: Pet }) => {
 
         <div
           className="bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md cursor-pointer hover:bg-rgb(var(--color-primary)) transition-colors"
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsLiked(!isLiked);
+          }}
         >
           <Heart
             size={24}

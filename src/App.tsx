@@ -1,11 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import Topbar from './containers/Topbar';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 
 function App() {
   return (
     <div>
+      <Provider store={appStore}>
       <Topbar />
       <Outlet />
+      </Provider>
     </div>
   );
 }

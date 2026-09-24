@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { InfoItem } from "./InfoItem";
 import { Section } from "./Section";
 import { HealthStatus } from "./HealthStatus";
+import { useNavigate } from "react-router-dom";
 
 interface PetModalProps {
   pet: Pet;
@@ -13,6 +14,12 @@ interface PetModalProps {
 
 export const PetModal = ({ pet, isOpen, onClose }: PetModalProps) => {
   if (!isOpen) return null;
+
+  return <PetModalContent pet={pet} onClose={onClose} />;
+};
+
+const PetModalContent = ({ pet, onClose }: Pick<PetModalProps, "pet" | "onClose">) => {
+  const navigate = useNavigate();
 
   const { name, age, breed, type, imageUrl, attributes, location, isVaccinated } = pet;
 
@@ -130,7 +137,7 @@ export const PetModal = ({ pet, isOpen, onClose }: PetModalProps) => {
                     bgColor="rgb(var(--color-primary))"
                     textColor="white"
                     width="100%"
-                    onClick={() => alert("Adoption process started!")}
+                    onClick={() => navigate("/post-adoption")}
                   />
                   <Button
                     text="Contact Shelter"
